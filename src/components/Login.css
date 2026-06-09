@@ -1,0 +1,8 @@
+.center {
+    display: flex; 
+    flex-direction: column;
+    justify-content: center; /* Horizontal centering */
+    align-items: center;     /* Vertical centering */
+    height: 100vh;    
+    gap: 16px;    /* Takes full screen height */
+}
