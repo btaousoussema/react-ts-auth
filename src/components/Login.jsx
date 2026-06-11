@@ -9,7 +9,6 @@ import useAuth from '../hooks/useAuth';
 function Login ()  {
     
     const { setAuth } = useAuth();
-    //const { setAuth } = useContext(AuthContext);
     const navigate = useNavigate();
     const [userData, setUserData] = useState({email: "", password: "", });
 

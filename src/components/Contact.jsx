@@ -1,9 +1,15 @@
 import { useEffect, useState } from "react";
 import useAxiosPrivate from "../hooks/useAxiosPrivate";
-//import axios from "../api/axios";
-//import {axiosPrivate} from "../api/axios";
 import { Link } from 'react-router-dom';
 import useRefreshToken from "../hooks/useRefreshToken";
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
+import { Button } from "@mui/material";
 
 const Contact = () => {
     const [contacts, setContacts] = useState([]);
@@ -51,16 +57,29 @@ const Contact = () => {
 
     return (
         <>
-            <Link to="/test">Contacts
-            </Link>            
-            <h2>test</h2>
-            <ul>
+        <div style={{ padding: "20px", display:"flex", flexDirection:"column", alignItems: "center", justifyContent: "flex-start", height: "100vh" }}>
+            <TableContainer component={Paper}/*</div> style={{ display: "flex", flexDirection:"column", alignItems: "center", justifyContent: "center" }}*/ 
+            >
+            <Table sx={{ minWidth: 650 }} aria-label="simple table">
+                <TableHead>
+                <TableRow>
+                    <TableCell>Firstname</TableCell>
+                    <TableCell>Lastname</TableCell>
+                </TableRow>
+                </TableHead>
+                <TableBody>
                 {contacts.map((contact) => (
-                    <li key={contact.id}>{contact.firstName} {contact.lastName}</li>
+                    <TableRow
+                    key={contact.id}>
+                        <TableCell>{contact.firstName}</TableCell>
+                        <TableCell>{contact.lastName}</TableCell>
+                    </TableRow>
                 ))}
-            </ul>
-            <button onClick={Test}>Refresh</button>
-            <button onClick={logout}>Log out</button>
+                </TableBody>
+            </Table>
+            </TableContainer>
+            <Button onClick={logout} style={{ marginTop: "20px" }}>Log out</Button>    
+        </div>
         </>
     )
 };
