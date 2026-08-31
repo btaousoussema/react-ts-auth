@@ -1,10 +1,14 @@
 import useAuth from "./useAuth";
 import axiosPrivate from "../api/axios";
+import { Auth } from "../context/AuthProvider";
 
-const useRefreshToken = () => {
-    const { setAuth } = useAuth();
+export type RefreshFunction = () => Promise<string | null>;
 
-    const refresh = async () =>{
+
+const useRefreshToken = (): RefreshFunction => {
+    const { setAuth }: { setAuth: React.Dispatch<React.SetStateAction<Auth>> } = useAuth();
+
+    const refresh = async () : Promise<string | null> => {
         const response = await axiosPrivate.get('/auth/refresh', {
             withCredentials: true,
         })

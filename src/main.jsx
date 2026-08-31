@@ -3,9 +3,8 @@ import { createRoot } from 'react-dom/client'
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import AuthProvider from './context/AuthProvider';
 import './index.css'
-import App from './App.jsx'
-import Login from './components/login.jsx'
-import Contact from './components/contact.jsx';
+import Login from './components/Login.tsx';
+import Contact from './components/Contact.tsx';
 import NavigationBar from './components/NavigationBar.jsx';
 
 createRoot(document.getElementById('root')).render(

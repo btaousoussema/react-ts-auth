@@ -10,19 +10,26 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { Button } from "@mui/material";
+import { type RefreshFunction } from "../hooks/useRefreshToken";
+
+interface Contact {
+    id: number;
+    firstName: string;
+    lastName: string;
+}
 
 const Contact = () => {
-    const [contacts, setContacts] = useState([]);
+    const [contacts, setContacts] = useState<Contact[]>([]);
     const axiosPrivate = useAxiosPrivate();
-    const refresh = useRefreshToken();
+    const refresh: RefreshFunction = useRefreshToken();
 
-    
-    const Test = async () => {
+    //To test the refresh Token function. 
+    const Test = async (): Promise<void> => {
             const resp = await refresh();
             console.log("Current contacts state: ", contacts);
     }
 
-    const logout = async () => {
+    const logout = async (): Promise<void> => {
         try {
             await axiosPrivate.post('/auth/logout', {}, { withCredentials: true });
         } catch (error) {
@@ -68,7 +75,7 @@ const Contact = () => {
                 </TableRow>
                 </TableHead>
                 <TableBody>
-                {contacts.map((contact) => (
+                {contacts.map((contact: Contact) => (
                     <TableRow
                     key={contact.id}>
                         <TableCell>{contact.firstName}</TableCell>

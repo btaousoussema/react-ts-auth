@@ -1,18 +1,18 @@
 import Button from '@mui/material/Button';
-import './login.css';
 import TextField from '@mui/material/TextField';
 import { Link, Navigate, useNavigate } from 'react-router-dom';
 import React, { useContext, useState } from 'react';
 import axios from '../api/axios';
 import useAuth from '../hooks/useAuth';
+import "./Login.css";
 
 function Login ()  {
     
     const { setAuth } = useAuth();
     const navigate = useNavigate();
-    const [userData, setUserData] = useState({email: "", password: "", });
+    const [userData, setUserData] = useState({email: "",});
 
-    const handleChange = (e) => {
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
         setUserData(prevState => ({
             ...prevState,
@@ -20,14 +20,14 @@ function Login ()  {
         }));
     };
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         try {
             const response = await axios.post('http://localhost:8080/auth/login', userData, {withCredentials: true  });
             console.log(response.data);
-            const accessToken = response?.data?.accessToken;
+            const accessToken:string  = response?.data?.accessToken;
             setAuth({ email: userData.email, accessToken });
-            setUserData({ email: userData.email, accessToken });
+            setUserData({ email: userData.email, });
             navigate("/contacts");
         } catch (error) {
             console.error('Error posting data:', error);
